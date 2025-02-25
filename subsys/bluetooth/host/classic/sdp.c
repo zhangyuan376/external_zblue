@@ -64,7 +64,7 @@ struct bt_sdp {
 	/* TODO: Allow more than one pending request */
 };
 
-static struct bt_sdp_record *db;
+static struct bt_sdp_record *db = NULL;
 static uint8_t num_services;
 
 static struct bt_sdp bt_sdp_pool[CONFIG_BT_MAX_CONN];
@@ -422,7 +422,7 @@ static struct bt_sdp_record *bt_sdp_foreach_svc(bt_sdp_svc_func_t func,
 {
 	struct bt_sdp_record *rec = db;
 
-	while (rec) {
+	while (rec != NULL) {
 		if (func(rec, user_data) == BT_SDP_ITER_STOP) {
 			break;
 		}
